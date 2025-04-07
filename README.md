@@ -1,1 +1,64 @@
-# Asientos-hm
+# Esta es la url para visualizar la pagina  https://github.com/TheMoonStart/TheMoonStart.github.io-BrilloN.git
+
+#Scrips de flujo de trabajo
+name: CI/CD Pipeline
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Ejecutar pruebas
+        run: npm test
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Desplegar al servidor
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /var/www/chatbot
+            git pull origin main
+            npm install
+            pm2 restart chatbot
+
+#Scrip Liberacion
+#!/bin/bash
+echo "Preparando entorno de liberación del chatbot..."
+
+# Instalar dependencias
+npm install
+
+# Compilar o hacer build si aplica
+echo "Entorno listo."
+
+#Scrip de liberacion
+#!/bin/bash
+echo "Ejecutando pruebas del chatbot..."
+
+# Ejecutar pruebas con Jest o Mocha
+npm test
+
+echo "Pruebas completadas."
+
+#Scrip de despliegue
+#!/bin/bash
+echo "Iniciando despliegue del chatbot..."
+
+# Subir cambios al servidor remoto
+ssh user@mi-servidor "cd /var/www/chatbot && git pull && npm install && pm2 restart chatbot"
+
+echo "Despliegue completado."
