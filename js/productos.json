@@ -1,0 +1,139 @@
+[
+    {
+        "id": "abrigo-01",
+        "titulo": "Arcilla roja",
+        "imagen": "./img/jabones/Arcilla Roja.png",
+        "categoria": {
+            "nombre": "Jabones",
+            "id": "jabones"
+        }
+        
+    },
+    {
+        "id": "abrigo-02",
+        "titulo": "Arcilla verde",
+        "imagen": "./img/jabones/Arcilla Verde.png",
+        "categoria": {
+            "nombre": "Jabones",
+            "id": "jabones"
+        }
+       
+    },
+    {
+        "id": "abrigo-03",
+        "titulo": "Avena",
+        "imagen": "./img/jabones/Avena.png",
+        "categoria": {
+            "nombre": "Jabones",
+            "id": "jabones"
+        }
+        
+    },
+    {
+        "id": "abrigo-04",
+        "titulo": "Aguacate",
+        "imagen": "./img/jabones/Aguacate.png",
+        "categoria": {
+            "nombre": "Jabones",
+            "id": "jabones"
+        }
+        
+    },
+    {
+        "id": "abrigo-05",
+        "titulo": "Almendras",
+        "imagen": "./img/jabones/Almendras.png",
+        "categoria": {
+            "nombre": "Jabones",
+            "id": "jabones"
+        }
+       
+    },
+    {
+        "id": "camiseta-01",
+        "titulo": "Sales de baño",
+        "imagen": "./img/cosmetico/Sales de Baño.png",
+        "categoria": {
+            "nombre": "Mas Vendidos",
+            "id": "Mas Vendidos"
+        }
+        
+    },
+    {
+        "id": "camiseta-02",
+        "titulo": "Mascarrilla y Tonico",
+        "imagen": "./img/cosmetico/Mascarrilla y Tonico.png",
+        "categoria": {
+            "nombre": "Mas Vendidos",
+            "id": "Mas Vendidos"
+        }
+       
+    },
+    {
+        "id": "camiseta-03",
+        "titulo": "Mascarrilla Seca",
+        "imagen": "./img/cosmetico/Mascarrilla Seca.png",
+        "categoria": {
+            "nombre": "Mas Vendidos",
+            "id": "Mas Vendidos"
+        }
+        
+    },
+    {
+        "id": "camiseta-04",
+        "titulo": "Lavanda",
+        "imagen": "./img/cosmetico/Lavanda.png",
+        "categoria": {
+            "nombre": "Mas Vendidos",
+            "id": "Mas Vendidos"
+        }
+        
+    },
+    {
+        "id": "camiseta-05",
+        "titulo": "Cúrcuma",
+        "imagen": "./img/cosmetico/Curcuma.png",
+        "categoria": {
+            "nombre": "Mas Vendidos",
+            "id": "Mas Vendidos"
+        }
+        
+    },
+    {
+        "id": "camiseta-06",
+        "titulo": "Jabón Batido ",
+        "imagen": "./img/cosmetico/Jabon Batido.png",
+        "categoria": {
+            "nombre": "Mas Vendidos",
+            "id": "Mas Vendidos"
+        }
+       
+    },
+    {
+        "id": "camiseta-07",
+        "titulo": "Jamaica",
+        "imagen": "./img/cosmetico/Jamaica.png",
+        "categoria": {
+            "nombre": "Mas Vendidos",
+            "id": "Mas Vendidos"
+        }
+    },
+    {
+        "id": "pantalon-01",
+        "titulo": "Crema Facial",
+        "imagen": "./img/crema/Crema Facial (2).png",
+        "categoria": {
+            "nombre": "Cremas",
+            "id": "Cremas"
+        }
+    },
+    {
+        "id": "pantalon-01",
+        "titulo": "Body butter",
+        "imagen": "./img/crema/Body Better.jpg",
+        "categoria": {
+            "nombre": "Productos Nuevos",
+            "id": "Productos Nuevos"
+        }
+    }
+]

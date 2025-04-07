@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrilloNatural</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .carousel-indicators button {
+            width: 12px;
+            height: 12px;
+            margin: 0 5px;
+            background-color: #A76D9A;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+        .carousel-indicators button.active {
+            background-color: #E2B8F9FF;
+        }
+        
+    </style>
+    <!-- Estilos para la burbuja flotante -->
+    <style>
+        #floating-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #0aec20;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+            z-index: 1000; /* Asegura que la burbuja se muestre encima de otros elementos */
+            text-decoration: none;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-[#FAF3E0] text-[#704214] left:300px">
+    
+<!-- Tarjeta Flotante de Novedades -->
+<div id="novedades-card" class="fixed bottom-24 left-4 bg-white shadow-lg p-4 rounded-lg w-64 flex items-center space-x-3 transition-opacity duration-500 opacity-0 z-50">
+    <img src="img/crema/Body Better.jpg" alt="Nuevo Producto" class="w-16 h-16 object-cover rounded-md">
+    <div>
+        <h3 class="text-[#A76D9A] font-bold text-sm">¡Nuevo Producto!</h3>
+        <p class="text-gray-700 text-xs">Descubre nuestro jabón especial para piel mixta.</p>
+        <a href="productos.html" class="text-[#A76D9A] text-sm font-semibold underline">Ver más</a>
+    </div>
+    <button onclick="cerrarNovedades()" class="text-gray-500 text-xl leading-none">&times;</button>
+</div>
+
+
+<script>
+    // Mostrar la tarjeta después de 2 segundos
+    setTimeout(() => {
+        document.getElementById('novedades-card').style.opacity = "1";
+    }, 2000);
+
+    // Cerrar la tarjeta
+    function cerrarNovedades() {
+        document.getElementById('novedades-card').style.opacity = "0";
+    }
+
+    // Desaparecer automáticamente después de 10 segundos
+    setTimeout(() => {
+        cerrarNovedades();
+    }, 10000);
+</script>
+
+
+
+    <!-- Encabezado -->
+     <header class="bg-[#A76D9A] text-white py-5 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center px-6">
+        <h1 class="text-3xl font-bold">BrilloNatural</h1>
+        <nav>
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="hover:text-[#EAB8E4]">INICIO</a></li>
+                <li><a href="contacto.html" class="hover:text-[#EAB8E4]">NOSOTROS</a></li>
+                <li><a href="productos.html" class="hover:text-[#EAB8E4]">FAVORITOS</a></li>
+                <li><a href="Catálogo.pdf" target="_blank" class="hover:text-[#EAB8E4]">CATÁLOGO</a></li>
+            </ul>
+        </nav>
+    </div>
+  </header>
+
+    <!-- Carrusel de Fotos -->
+    <section class="w-screen py-12 px-0">
+        <div class="relative overflow-hidden">
+            <div id="carousel" class="carousel-inner flex">
+                <div class="min-w-full">
+                    <img src="images/Banner1.png" alt="Foto 1" class="w-full h-96 object-cover">
+                </div>
+                <div class="min-w-full">
+                    <img src="images/Banner2.png" alt="Foto 2" class="w-full h-96 object-cover">
+                </div>
+                <div class="min-w-full">
+                    <img src="images/Banner3.png" alt="Foto 3" class="w-full h-96 object-cover">
+                </div>
+            </div>
+
+            <!-- Indicadores (puntos) para moverse entre las imágenes -->
+            <div class="carousel-indicators">
+                <button data-slide="0" class="active"></button>
+                <button data-slide="1"></button>
+                <button data-slide="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Principal - Card List -->
+    <main class="flex-grow">
+
+        <!-- Sección de presentación -->
+        <section class="container mx-auto px-6 text-center my-10" id="jabones-para-eventos">
+          <h2 class="text-3xl font-bold text-[#A76D9A] mb-4">Jabones Personalizados para Eventos</h2>
+          <p class="text-lg text-gray-700">
+            Descubre nuestra exclusiva selección de jabones personalizados para bodas, eventos sociales, cumpleaños
+            y cualquier ocasión especial. Elige el mejor jabón y sorprende a tus
+            invitados con un detalle único e inolvidable.
+          </p>
+        </section>
+    
+        <!-- Productos -->
+        <section class="container mx-auto px-6 mb-10">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            
+            <!-- Producto 1 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+              <img src="images/bautizo.jpg" alt="Crema para manos" class="w-full h-56 object-cover rounded-md mb-4">
+              <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Eventos Sociales</h3>
+            </div>
+            
+            <!-- Producto 2 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+              <img src="images/dino.jpg" alt="Bálsamo labial" class="w-full h-56 object-cover rounded-md mb-4">
+              <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Día del niño</h3>
+            </div>
+            
+            <!-- Producto 3 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+              <img src="images/jalowin.jpg" alt="Desmaquillante" class="w-full h-56 object-cover rounded-md mb-4">
+              <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">halloween</h3>
+            </div>
+            
+            <!-- Producto 4 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+              <img src="images/Pokerjpg.jpg" alt="Espuma limpiadora" class="w-full h-56 object-cover rounded-md mb-4">
+              <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Caballeros</h3>
+            </div>
+
+            <!-- Producto 5 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+              <img src="images/DiaDeLasMadres.jpg" alt="Espuma limpiadora" class="w-full h-56 object-cover rounded-md mb-4">
+              <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Día de las madres</h3>
+            </div>
+
+            <!-- Producto 6 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+              <img src="images/Cumpleaños.jpg" alt="Espuma limpiadora" class="w-full h-56 object-cover rounded-md mb-4">
+              <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Cumpleaños</h3>
+            </div>
+
+            <!-- Producto 7 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+              <img src="images/Mexico.jpg" alt="Espuma limpiadora" class="w-full h-56 object-cover rounded-md mb-4">
+              <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Fiestas Patrias</h3>
+            </div>
+
+            <!-- Producto 8 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+              <img src="images/Navidadjpg.jpg" alt="Espuma limpiadora" class="w-full h-56 object-cover rounded-md mb-4">
+              <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Navidad</h3>
+            </div>
+    
+          </div>
+        </section>
+      </main>
+
+        
+    </section>
+
+    <!-- Apartado de Reconocimiento Facial -->
+    <section class="container mx-auto text-center py-16 px-6">
+        <h2 class="text-4xl font-semibold text-[#A76D9A] mb-6">¿Qué jabón es ideal para ti?</h2>
+        <p class="text-lg mb-6 text-gray-700">Toma una foto de tu rostro y descubre el jabón adecuado según tu tipo de piel.</p>
+
+        <div class="flex flex-col items-center">
+            <a href="cuestonario.html" class="bg-[#A76D9A] text-white py-3 px-6 rounded-full shadow-md hover:bg-[#EAB8E4] transition">
+                Analizar Rostro
+            </a>
+        </div>
+        
+    </section>
+
+    <!-- Productos -->
+    <section class="container mx-auto px-6">
+        <h2 class="text-3xl font-semibold text-center mb-8 text-[#A76D9A]">Nuestros Productos</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Producto 1 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+                <img src="images/Mariposa Blanca.png" alt="Crema para manos" class="w-full h-56 object-cover rounded-md mb-4">
+                <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Jabón de arroz</h3>
+                <p class="text-gray-700">Aclara la piel, unifica el tono y aporta luminosidad.</p>
+            </div>
+            <!-- Producto 2 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+                <img src="images/Mariposa Cafe.png" alt="Bálsamo labial" class="w-full h-56 object-cover rounded-md mb-4">
+                <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Jabón de arcilla roja</h3>
+                <p class="text-gray-700">Purifica y detoxifica la piel, mejora la circulación y es excelente para pieles sensibles.</p>
+            </div>
+            <!-- Producto 3 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+                <img src="images/Mariposa Rosa (1).png" alt="Desmaquillante" class="w-full h-56 object-cover rounded-md mb-4">
+                <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Jabón de rosa mosqueta</h3>
+                <p class="text-gray-700">Regenera la piel, combate el envejecimiento y ayuda a reducir cicatrices y manchas.</p>
+            </div>
+            <!-- Producto 4 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+                <img src="images/Mariposa VerdeC (1).png" alt="Espuma limpiadora" class="w-full h-56 object-cover rounded-md mb-4">
+                <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Jabón de aguacate</h3>
+                <p class="text-gray-700">Hidrata profundamente, nutre la piel y combate la resequedad. </p>
+            </div>
+            <!-- Producto 5 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+                <img src="images/Mariposa Amarilla 1.png" alt="Espuma limpiadora" class="w-full h-56 object-cover rounded-md mb-4">
+                <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Jabón de manzanilla</h3>
+                <p class="text-gray-700">Calma la piel, reduce la inflamación y es ideal para pieles sensibles o con irritaciones.</p>
+            </div>
+            <!-- Producto 6 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+                <img src="images/Mariposa blanca1.jpg" alt="Espuma limpiadora" class="w-full h-56 object-cover rounded-md mb-4">
+                <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Jabón de avena</h3>
+                <p class="text-gray-700">Exfolia suavemente, hidrata y calma la piel.</p>
+            </div>
+            <!-- Producto 7 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+                <img src="images/Mariposa Cafe 3.png" alt="Espuma limpiadora" class="w-full h-56 object-cover rounded-md mb-4">
+                <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Jabón de jamaica</h3>
+                <p class="text-gray-700">Rica en antioxidantes, ayuda a revitalizar la piel, tonificar y dar un efecto rejuvenecedor.</p>
+            </div>
+            <!-- Producto 8 -->
+            <div class="bg-[#EAC6F5] p-6 rounded-lg shadow-lg text-center">
+                <img src="images/Mariposa Negra 3.png" alt="Espuma limpiadora" class="w-full h-56 object-cover rounded-md mb-4">
+                <h3 class="text-2xl font-semibold text-[#383737FF] mb-2">Jabón de carbón activado</h3>
+                <p class="text-gray-700">Limpia profundamente, elimina impurezas y controla el exceso de grasa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#A76D9A] text-white text-center py-6 mt-12">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 BrilloNatural - Todos los derechos reservados</p>
+            <div class="mt-4">
+                <a href="https://www.facebook.com/profile.php?id=100064068493083" target="_blank">
+                    <img src="images/facebook.png" width="40" class="inline-block">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Burbuja Flotante para WhatsApp -->
+    <a id="floating-bubble" href="https://wa.me/525624607646" target="_blank">
+        <!-- Agregamos ícono de WhatsApp y conservamos el texto "Chat" -->
+        <img src="images/whatsapp.png" alt="WhatsApp" class="w-25  ">
+    </a>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-inner > div');
+        const totalSlides = slides.length;
+        const indicators = document.querySelectorAll('.carousel-indicators button');
+
+        // Escucha de eventos para los indicadores (puntos)
+        indicators.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                currentSlide = index;
+                updateCarousel();
+            });
+        });
+
+        // Función para actualizar el carrusel
+        function updateCarousel() {
+            const offset = -currentSlide * 100;
+            document.querySelector('.carousel-inner').style.transform = `translateX(${offset}%)`;
+            indicators.forEach((button, index) => {
+                button.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Avanza automáticamente cada 5 segundos
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }, 5000); // Cambia 5000 (5s) por el tiempo que desees en milisegundos
+    </script>
+
+</body>
+</html>

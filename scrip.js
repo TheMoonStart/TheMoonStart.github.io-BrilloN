@@ -1,0 +1,99 @@
+const carrito = document.getElementById('carrito');
+const elementos1 = document.getElementById('lista-1');
+const lista = document.querySelector('#lista-carrito tbody');
+const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
+
+cargarEventListeners();
+
+function cargarEventListeners() {
+
+    elementos1.addEventListener('click', comprarElemento);
+    carrito.addEventListener('click', eliminarElemento);
+    vaciarCarritoBtn.addEventListener('click', vaciarCarrito);
+}
+
+
+function comprarElemento(e) {
+    e.preventDefault();
+    if(e.target.classList.contains('agregar-carrito')) {
+        const elemento = e.target.parentElement;
+        leerDatosElemento(elemento);
+    }
+}
+
+function leerDatosElemento(elemento) {
+    const infoElemento = {
+        imagen: elemento.querySelector('img').src,
+        titulo: elemento.querySelector('h3').textContent,
+        precio: elemento.querySelector('.precio').textContent,
+        id: elemento.querySelector('a').getAttribute('data-id')
+    }
+    insertarCarrito(infoElemento);
+}
+
+function insertarCarrito(elemento) {
+    
+    const row = document.createElement('tr');
+    row.innerHTML = `
+        <td>
+            <img src="${elemento.imagen}" width=100 >
+        </td>
+        <td>
+            ${elemento.titulo}
+        </td>
+        <td>
+            ${elemento.precio}
+        </td>
+        <td>
+            <a herf="#" class"borrar" dara-id="${elemento.id}">x </a>
+        </td>
+    `;
+    lista.appendChild(row);
+}
+
+function eliminarElemento(e) {
+    e.preventDefault();
+    let elemento,
+        elementoId;
+    if(e.target.classList.contains('borrar')) {
+        e.target.parentElement.parentElement.remove();
+        elemento = e.target.parentElement.parentElement;
+        elementoId = elemento.querySelector('a').getAttribute('data-id');
+    }
+}
+
+function vaciarCarrito() {
+    while(lista.firstChild) {
+        lista.removeChild(lista.firstChild);
+    }
+    return false;
+
+
+
+
+
+
+
+
+}
+
+
+
+    //CAMARA
+    document.addEventListener("DOMContentLoaded", async () => {
+        const video = document.createElement("video");
+        video.setAttribute("id", "video");
+        video.setAttribute("autoplay", "");
+        video.setAttribute("playsinline", "");
+        document.body.insertBefore(video, document.body.firstChild);
+    
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+            console.log("✅ Cámara activada correctamente");
+        } catch (error) {
+            console.error("❌ Error al acceder a la cámara:", error);
+            alert("No se pudo acceder a la cámara. Verifica los permisos en la configuración del navegador.");
+        }
+    });
+    

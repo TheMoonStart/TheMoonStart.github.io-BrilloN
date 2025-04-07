@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Recomendador de Jabones Naturales</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f394d0, #e0eafc);
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: rgb(249, 249, 249);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    .circle {
+      position: absolute;
+      border: 3px solid rgb(133, 34, 225);
+      border-radius: 50%;
+      width: 180px;
+      height: 180px;
+      pointer-events: none;
+    }
+
+    video, canvas {
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+      margin: 10px 0;
+    }
+
+    button {
+      background-color: #9e44e4;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .results {
+      text-align: left;
+      font-size: 1rem;
+    }
+
+    .soap-images img {
+      width: 100px;
+      margin: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💧 Recomendador de Jabones Naturales</h1>
+
+  <div class="card" id="formCard">
+    <form id="cuestionario">
+      <label>Sexo:</label><br>
+      <select id="sexo" required>
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+      </select><br><br>
+
+      <label>Edad:</label><br>
+      <input type="number" id="edad" required><br><br>
+
+      <label>¿Qué tipo de piel crees que tienes?</label><br>
+      <select id="tipoPielUsuario" required>
+        <option value="grasa">Grasa</option>
+        <option value="mixta">Mixta</option>
+        <option value="seca">Seca</option>
+        <option value="sensible">Sensible</option>
+      </select><br><br>
+
+      <button type="submit">Siguiente</button>
+    </form>
+  </div>
+
+  <div class="card hidden" id="cameraCard">
+    <h2 id="instruccion">📷 Toma tu foto</h2>
+    <video id="video" autoplay playsinline></video>
+    <canvas id="canvas" class="hidden"></canvas>
+    <div class="circle" id="circle"></div>
+    <br>
+    <button id="capturar">Capturar Foto</button>
+  </div>
+
+  <div class="card hidden" id="resultadoCard">
+    <h2>✨ Resultado de tu análisis</h2>
+    <div class="results" id="resultadoTexto"></div>
+    <div class="soap-images" id="imagenesJabones"></div>
+    <button onclick="location.reload()">🔁 Reiniciar</button>
+  </div>
+
+  <script>
+    const cuestionario = document.getElementById('cuestionario');
+    const formCard = document.getElementById('formCard');
+    const cameraCard = document.getElementById('cameraCard');
+    const resultadoCard = document.getElementById('resultadoCard');
+    const resultadoTexto = document.getElementById('resultadoTexto');
+    const imagenesJabones = document.getElementById('imagenesJabones');
+    const instruccion = document.getElementById('instruccion');
+    const canvas = document.getElementById('canvas');
+    const video = document.getElementById('video');
+    const circle = document.getElementById('circle');
+    const ctx = canvas.getContext('2d');
+  
+    let datosUsuario = {};
+  
+    cuestionario.addEventListener('submit', function(e) {
+      e.preventDefault();
+      datosUsuario = {
+        sexo: document.getElementById('sexo').value,
+        edad: document.getElementById('edad').value,
+        tipoPielUsuario: document.getElementById('tipoPielUsuario').value
+      };
+      formCard.classList.add('hidden');
+      cameraCard.classList.remove('hidden');
+      iniciarCamara();
+    });
+  
+    function iniciarCamara() {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          video.srcObject = stream;
+          video.addEventListener('loadedmetadata', () => {
+            posicionarCirculo();
+            verificarRostro();
+          });
+        });
+    }
+  
+    function posicionarCirculo() {
+      const rect = video.getBoundingClientRect();
+      circle.style.top = `${rect.top + 70}px`;
+      circle.style.left = `${rect.left + rect.width / 2 - 90}px`;
+    }
+  
+    // Simulación simple de detección facial basada en actividad de color
+    function verificarRostro() {
+  const intervalo = setInterval(() => {
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+
+    tempCanvas.width = video.videoWidth;
+    tempCanvas.height = video.videoHeight;
+    tempCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+
+    const centerX = tempCanvas.width / 2;
+    const centerY = tempCanvas.height / 2;
+    const radius = 90;
+
+    const imageData = tempCtx.getImageData(centerX - radius, centerY - radius, radius * 2, radius * 2);
+    const data = imageData.data;
+
+    let brightnessValues = [];
+
+    for (let i = 0; i < data.length; i += 4) {
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      const brightness = (r + g + b) / 3;
+      brightnessValues.push(brightness);
+    }
+
+    const avg = brightnessValues.reduce((a, b) => a + b, 0) / brightnessValues.length;
+    const variance = brightnessValues.reduce((acc, val) => acc + Math.pow(val - avg, 2), 0) / brightnessValues.length;
+    const stdDev = Math.sqrt(variance);
+
+    // ✅ Si el brillo cambia poco, no hay rostro (rojo). Si varía bastante, posiblemente hay rostro (verde).
+    if (stdDev > 20) {
+      circle.style.borderColor = 'limegreen'; // Cara detectada
+    } else {
+      circle.style.borderColor = 'red'; // No se detecta rostro
+    }
+
+  }, 500);
+}
+
+    document.getElementById('capturar').addEventListener('click', () => {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      canvas.classList.remove('hidden');
+      instruccion.classList.add('hidden');
+      circle.style.display = 'none';
+  
+      const tipoDetectado = detectarTipoDePiel(canvas);
+      mostrarResultado(tipoDetectado);
+    });
+  
+    function detectarTipoDePiel(canvas) {
+      const tipos = ['grasa', 'mixta', 'seca', 'sensible'];
+      return tipos[Math.floor(Math.random() * tipos.length)];
+    }
+  
+    function mostrarResultado(tipoDetectado) {
+      cameraCard.classList.add('hidden');
+      resultadoCard.classList.remove('hidden');
+  
+      resultadoTexto.innerHTML = `
+        Tu sexo es <b>${datosUsuario.sexo}</b>,<br>
+        tu edad es <b>${datosUsuario.edad} años</b>,<br>
+        tú piensas que tu piel es <b>${datosUsuario.tipoPielUsuario}</b><br>
+        y el sistema detectó que tu piel es <b>${tipoDetectado}</b>.<br><br>
+        <strong>🌸 Recomendaciones de jabones para ti:</strong>
+      `;
+  
+      mostrarJabones(tipoDetectado);
+    }
+  
+    function mostrarJabones(tipo) {
+  const jabones = {
+    grasa: ['Mariposa Cafe.png', 'Luna Negra.png', 'Luna Verde.png'],
+    mixta: ['Estrella.png', 'Jabon Amarillo.png', 'Sales De Baño.jpg', 'Serum.jpg'],
+    seca: ['Mariposa VerdeC (1).png', 'Body.jpg', 'Mariposa blanca1.jpg', 'Jabon Arbol.png', 'Jabon blanco.png', 'Mariposa Verde 1 (1).png'],
+    sensible: ['Mariposa Amarilla 1.png', 'Mariposa Rosa (1).png']
+  };
+
+  // Verificar las rutas en la consola
+  console.log("Mostrando jabones para el tipo de piel:", tipo);
+  jabones[tipo].forEach(nombre => {
+    console.log(`Ruta de la imagen: jabones/${tipo}/${nombre}`);
+  });
+
+  imagenesJabones.innerHTML = jabones[tipo].map(nombre =>
+    `<img src="jabones/${tipo}/${nombre}" alt="${nombre}">`
+  ).join('');
+}
+
+
+    window.addEventListener('resize', posicionarCirculo);
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrilloNatural - Sobre Nosotros</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #FAF3E0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Encabezado -->
+  <header class="bg-[#A76D9A] text-white py-5 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center px-6">
+        <h1 class="text-3xl font-bold">BrilloNatural</h1>
+        <nav>
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="hover:text-[#EAB8E4]">INICIO</a></li>
+                <li><a href="contacto.html" class="hover:text-[#EAB8E4]">NOSOTROS</a></li>
+                <li><a href="productos.html" class="hover:text-[#EAB8E4]">FAVORITOS</a></li>
+                <li><a href="Catálogo.pdf" target="_blank" class="hover:text-[#EAB8E4]">CATÁLOGO</a></li>
+            </ul>
+        </nav>
+    </div>
+  </header>
+
+  <!-- Sección Sobre Nosotros -->
+  <section class="container mx-auto py-16 px-6">
+    <h2 class="text-4xl font-bold text-center text-[#A76D9A] mb-10">Sobre Nosotros</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div>
+        <img src="images/PostDeJabones.png" alt="Historia de BrilloNatural" class="rounded-2xl shadow-lg">
+      </div>
+      <div>
+        <!-- Se centró el texto del h3 -->
+        <h3 class="text-3xl font-bold text-[#A76D9A] mb-4 text-center">El Origen de BrilloNatural</h3>
+        <!-- Párrafos con texto justificado (como en tu versión previa) -->
+        <p class="text-gray-700 mb-4" style="text-align: justify;">
+          BrilloNatural nació del amor por la naturaleza y el deseo de ofrecer productos auténticos y saludables para el cuidado personal. Cada jabón es elaborado de manera artesanal, utilizando ingredientes vegetables y procesos tradicionales que respetan el medio ambiente.
+        </p>
+        <p class="text-gray-700 mb-4" style="text-align: justify;">
+          Nuestra historia comenzó cuando descubrimos las propiedades únicas de las plantas locales y su capacidad para cuidar y nutrir la piel. Desde entonces, hemos trabajado con pasión para crear productos que reflejen la riqueza de nuestra tierra.
+        </p>
+        <p class="text-gray-700" style="text-align: justify;">
+          Acompáñanos en este viaje hacia un cuidado más natural, donde cada jabón cuenta una historia de dedicación, tradición y amor por lo auténtico.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Productos Más Vendidos -->
+  <section class="container mx-auto py-16 px-6">
+    <h2 class="text-4xl font-bold text-center text-[#A76D9A] mb-10">Productos Más Vendidos</h2>
+    <!-- Ajustamos md:grid-cols-4 y ampliamos el tamaño de las tarjetas -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <!-- Tarjeta 1 -->
+      <div class="bg-[#f1d7ff] rounded-2xl shadow-lg p-8 text-center">
+        <!-- Ajustamos la altura de la imagen a h-60 -->
+        <img src="images/cremaparamanos.jpg" alt="Jabón de Lavanda" class="w-full h-60 object-cover rounded-lg mb-4">
+        <h3 class="text-2xl font-bold text-[#383737FF] mb-2">Crema para manos</h3>
+        <p class="text-gray-700">Relajante y perfecto para pieles sensibles.</p>
+      </div>
+      <!-- Tarjeta 2 -->
+      <div class="bg-[#f1d7ff] rounded-2xl shadow-lg p-8 text-center">
+        <img src="images/balsamo.jpg" alt="Jabón de Miel y Avena" class="w-full h-60 object-cover rounded-lg mb-4">
+        <h3 class="text-2xl font-bold text-[#383737FF] mb-2">Bálsamo labial</h3>
+        <p class="text-gray-700">Hidratante y exfoliante suave.</p>
+      </div>
+      <!-- Tarjeta 3 -->
+      <div class="bg-[#f1d7ff] rounded-2xl shadow-lg p-8 text-center">
+        <img src="images/Desmaquillante.jpg" alt="Jabón de Rosa Mosqueta" class="w-full h-60 object-cover rounded-lg mb-4">
+        <h3 class="text-2xl font-bold text-[#383737FF] mb-2">Desmaquillante</h3>
+        <p class="text-gray-700">Ideal para regenerar y cuidar la piel.</p>
+      </div>
+      <!-- Tarjeta 4 -->
+      <div class="bg-[#f1d7ff] rounded-2xl shadow-lg p-8 text-center">
+        <img src="images/espumalimpiadora.jpg" alt="Jabón de Rosa Mosqueta" class="w-full h-60 object-cover rounded-lg mb-4">
+        <h3 class="text-2xl font-bold text-[#383737FF] mb-2">Espuma limpiadora</h3>
+        <p class="text-gray-700">Ideal para regenerar y cuidar la piel.</p>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#A76D9A] text-white text-center py-6 mt-12">
+    <div class="container mx-auto px-6">
+        <p>&copy; 2025 BrilloNatural - Todos los derechos reservados</p>
+        <div class="mt-4">
+            <a href="https://www.facebook.com/profile.php?id=100064068493083" target="_blank">
+                <img src="images/facebook.png" width="40" class="inline-block">
+            </a>
+        </div>
+    </div>
+  </footer>
+
+  <!-- Script para cambiar la imagen cada 5 segundos -->
+  <script>
+    // Selecciona la imagen del apartado "Sobre Nosotros" mediante su alt
+    const imageElement = document.querySelector('img[alt="Historia de BrilloNatural"]');
+
+    // Array con las rutas de las imágenes que deseas mostrar
+    const images = [
+      "images/huerto.jpg",
+      "images/huerto1.jpg",
+      "images/huerto2.jpg"
+    ];
+
+    let currentIndex = 0;
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      imageElement.src = images[currentIndex];
+    }, 3000); // Cambia cada 5000 ms (5 segundos)
+  </script>
+</body>
+</html>
